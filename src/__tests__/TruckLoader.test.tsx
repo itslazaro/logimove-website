@@ -1,0 +1,65 @@
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { render, screen, act } from "@testing-library/react";
+
+// Mock framer-motion to control animation behavior in tests
+vi.mock("framer-motion", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("framer-motion")>();
+  return {
+    ...actual,
+    useReducedMotion: vi.fn().mockReturnValue(false),
+  };
+});
+
+import { useReducedMotion } from "framer-motion";
+import { TruckLoader } from "@/components/loading/TruckLoader";
+
+beforeEach(() => {
+  vi.useFakeTimers();
+  vi.mocked(useReducedMotion).mockReturnValue(false);
+});
+
+afterEach(() => {
+  vi.useRealTimers();
+  vi.restoreAllMocks();
+});
+
+describe("TruckLoader", () => {
+  it("renders the loader overlay", () => {
+    render(<TruckLoader />);
+    expect(screen.getByText(/moving your world/i)).toBeInTheDocument();
+  });
+
+  it("is hidden from assistive tech via aria-hidden", () => {
+    render(<TruckLoader />);
+    const overlay = screen.getByText(/moving your world/i).closest("[aria-hidden]");
+    expect(overlay).toHaveAttribute("aria-hidden", "true");
+  });
+
+  it("shows the logo", () => {
+    render(<TruckLoader />);
+    expect(screen.getByAltText(/logimove logo/i)).toBeInTheDocument();
+  });
+
+  it("self-removes after the hold duration", () => {
+    const { container } = render(<TruckLoader />);
+
+    // Still visible before hold expires
+    act(() => { vi.advanceTimersByTime(3000); });
+    expect(container.innerHTML).not.toBe("");
+
+    // After TOTAL_HOLD (4800ms) + FADE_OUT (450ms) it should be gone
+    act(() => { vi.advanceTimersByTime(4800); });
+    act(() => { vi.advanceTimersByTime(500); });
+    expect(container.innerHTML).toBe("");
+  });
+
+  it("uses shorter hold when reduced motion is active", () => {
+    vi.mocked(useReducedMotion).mockReturnValue(true);
+    const { container } = render(<TruckLoader />);
+
+    // After 900ms + 450ms fade it should be gone
+    act(() => { vi.advanceTimersByTime(900); });
+    act(() => { vi.advanceTimersByTime(500); });
+    expect(container.innerHTML).toBe("");
+  });
+});
