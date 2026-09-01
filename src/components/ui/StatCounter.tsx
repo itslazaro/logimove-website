@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { useInView, useReducedMotion } from "framer-motion";
 import type { Stat } from "@/content/stats";
+import { useCountUp } from "@/hooks/useCountUp";
 import { cn } from "@/lib/utils";
 
 interface StatCounterProps extends Stat {
@@ -11,25 +10,7 @@ interface StatCounterProps extends Stat {
 }
 
 export function StatCounter({ value, suffix, label, onDark = false }: StatCounterProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
-  const reduce = useReducedMotion();
-  const [display, setDisplay] = useState(reduce ? value : 0);
-
-  useEffect(() => {
-    if (!inView || reduce) return;
-    const duration = 1500;
-    const start = performance.now();
-    let raf = 0;
-    const tick = (now: number) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplay(Math.round(eased * value));
-      if (progress < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [inView, reduce, value]);
+  const { ref, display } = useCountUp({ value });
 
   return (
     <div ref={ref}>

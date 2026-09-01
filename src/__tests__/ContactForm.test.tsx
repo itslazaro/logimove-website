@@ -11,6 +11,11 @@ beforeEach(() => {
   vi.spyOn(window, "open").mockImplementation(openSpy);
 });
 
+/** Create a userEvent instance with no delay to avoid React 19 jsdom character doubling. */
+function setupUser() {
+  return userEvent.setup({ delay: null });
+}
+
 describe("ContactForm", () => {
   it("renders all form fields", () => {
     render(<ContactForm />);
@@ -27,7 +32,7 @@ describe("ContactForm", () => {
   });
 
   it("shows validation error for empty name on submit", async () => {
-    const user = userEvent.setup();
+    const user = setupUser();
     render(<ContactForm />);
 
     await user.click(screen.getByRole("button", { name: /contact us/i }));
@@ -38,7 +43,7 @@ describe("ContactForm", () => {
   });
 
   it("shows validation error for invalid email", async () => {
-    const user = userEvent.setup();
+    const user = setupUser();
     render(<ContactForm />);
 
     await user.type(screen.getByLabelText(/name/i), "Daniel");
@@ -50,7 +55,7 @@ describe("ContactForm", () => {
   });
 
   it("shows validation error for short message", async () => {
-    const user = userEvent.setup();
+    const user = setupUser();
     render(<ContactForm />);
 
     await user.type(screen.getByLabelText(/name/i), "Daniel");
@@ -62,7 +67,7 @@ describe("ContactForm", () => {
   });
 
   it("opens WhatsApp on valid submission", async () => {
-    const user = userEvent.setup();
+    const user = setupUser();
     render(<ContactForm />);
 
     await user.type(screen.getByLabelText(/name/i), "Daniel");
@@ -78,7 +83,7 @@ describe("ContactForm", () => {
   });
 
   it("shows success status after submission", async () => {
-    const user = userEvent.setup();
+    const user = setupUser();
     render(<ContactForm />);
 
     await user.type(screen.getByLabelText(/name/i), "Daniel");
@@ -91,7 +96,7 @@ describe("ContactForm", () => {
   });
 
   it("shows copy button after submission", async () => {
-    const user = userEvent.setup();
+    const user = setupUser();
     render(<ContactForm />);
 
     await user.type(screen.getByLabelText(/name/i), "Daniel");
@@ -103,7 +108,7 @@ describe("ContactForm", () => {
   });
 
   it("phone field is optional — validates format when provided", async () => {
-    const user = userEvent.setup();
+    const user = setupUser();
     render(<ContactForm />);
 
     await user.type(screen.getByLabelText(/name/i), "Daniel");

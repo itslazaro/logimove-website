@@ -1,31 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Truck } from "lucide-react";
 import { site } from "@/config/site";
+import { useTruckLoader } from "@/hooks/useTruckLoader";
 
 const TRUCK_CROSS = 3.2; // seconds for the truck to cross the screen
-const TOTAL_HOLD = 4800; // ms before the overlay begins fading out (~5s branded intro)
 
 export function TruckLoader() {
   const reduce = useReducedMotion();
-  const [done, setDone] = useState(false);
-  const [unmounted, setUnmounted] = useState(false);
-  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
-
-  useEffect(() => {
-    const timerList = timers.current;
-    const hold = reduce ? 900 : TOTAL_HOLD;
-    timerList.push(
-      setTimeout(() => {
-        setDone(true);
-        timerList.push(setTimeout(() => setUnmounted(true), 450));
-      }, hold),
-    );
-    return () => timerList.forEach(clearTimeout);
-  }, [reduce]);
+  const { done, unmounted } = useTruckLoader();
 
   if (unmounted) return null;
 
