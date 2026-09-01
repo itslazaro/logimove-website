@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+/*
+ * LogiMove design tokens — single source of truth (see DESIGN.md).
+ * Font variables (--font-archivo, --font-inter, --font-jetbrains) are provided
+ * by next/font in the root layout. @theme inline resolves them at build time.
+ */
+@theme inline {
+  /* Typography */
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", monospace;
+
+  /* Brand orange */
+  --color-brand-50: #fff3ea;
+  --color-brand-100: #ffe2cf;
+  --color-brand-200: #ffc49e;
+  --color-brand-300: #ffa066;
+  --color-brand-400: #ff7d33;
+  --color-brand-500: #f2600c;
+  --color-brand-600: #d9550a;
+  --color-brand-700: #b34608;
+  --color-brand-800: #8a3607;
+  --color-brand-900: #642706;
+
+  /* Exact orange sampled from the LogiMove logo mark (#ef7720) */
+  --color-brand-logo: #ef7720;
+
+  /* Ink / neutrals */
+  --color-ink-900: #0a0a0a;
+  --color-ink-800: #1a1a18;
+  --color-ink-700: #262624;
+  --color-gray-500: #73736d;
+  --color-gray-400: #a3a39d;
+  --color-gray-200: #d1d1cc;
+  --color-gray-100: #e8e8e5;
+  --color-gray-50: #f7f7f5;
+
+  /* Semantic */
+  --color-success: #1e8e3e;
+  --color-warning: #a96407;
+  --color-error: #c5221f;
+  --color-info: #1967d2;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-whatsapp-pulse: whatsapp-pulse 2.4s var(--ease-out-expo) infinite;
+}
+
+@keyframes whatsapp-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(37 211 102 / 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgb(37 211 102 / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(37 211 102 / 0);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-white);
+    color: var(--color-ink-900);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  section[id],
+  [data-anchor] {
+    scroll-margin-top: 6.5rem;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-brand-200);
+    color: var(--color-ink-900);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
