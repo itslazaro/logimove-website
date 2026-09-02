@@ -19,15 +19,6 @@ export function Hero() {
       <Container className="relative z-10 grid grid-cols-1 items-center gap-8 py-24 sm:py-28 lg:grid-cols-12 lg:gap-6 lg:py-32">
         <div className="flex flex-col items-start gap-8 lg:col-span-7">
           <Reveal>
-            <p className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-100 px-4 py-2 shadow-sm">
-              <span className="size-2 animate-pulse rounded-full bg-brand-600" />
-              <span className="text-xs font-bold uppercase tracking-[0.16em] text-brand-800">
-                Global Logistics Partner
-              </span>
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.08}>
             <h1 className="font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-ink-800 text-balance sm:text-6xl">
               Fast.
               <br />

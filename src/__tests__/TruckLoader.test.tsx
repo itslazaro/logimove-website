@@ -44,12 +44,12 @@ describe("TruckLoader", () => {
     const { container } = render(<TruckLoader />);
 
     // Still visible before hold expires
-    act(() => { vi.advanceTimersByTime(3000); });
+    act(() => { vi.advanceTimersByTime(1000); });
     expect(container.innerHTML).not.toBe("");
 
-    // After TOTAL_HOLD (4800ms) + FADE_OUT (450ms) it should be gone
-    act(() => { vi.advanceTimersByTime(4800); });
-    act(() => { vi.advanceTimersByTime(500); });
+    // After TOTAL_HOLD (1600ms) + FADE_OUT (400ms) it should be gone
+    act(() => { vi.advanceTimersByTime(1600); });
+    act(() => { vi.advanceTimersByTime(450); });
     expect(container.innerHTML).toBe("");
   });
 
@@ -57,9 +57,9 @@ describe("TruckLoader", () => {
     vi.mocked(useReducedMotion).mockReturnValue(true);
     const { container } = render(<TruckLoader />);
 
-    // After 900ms + 450ms fade it should be gone
-    act(() => { vi.advanceTimersByTime(900); });
+    // After 500ms + 400ms fade it should be gone
     act(() => { vi.advanceTimersByTime(500); });
+    act(() => { vi.advanceTimersByTime(450); });
     expect(container.innerHTML).toBe("");
   });
 });

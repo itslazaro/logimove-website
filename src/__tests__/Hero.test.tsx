@@ -8,11 +8,6 @@ describe("Hero", () => {
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(/fast/i);
   });
 
-  it("renders the tagline text", () => {
-    render(<Hero />);
-    expect(screen.getByText(/global logistics partner/i)).toBeInTheDocument();
-  });
-
   it("renders the description paragraph", () => {
     render(<Hero />);
     expect(

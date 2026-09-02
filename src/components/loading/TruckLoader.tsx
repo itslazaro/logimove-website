@@ -6,7 +6,7 @@ import { Truck } from "lucide-react";
 import { site } from "@/config/site";
 import { useTruckLoader } from "@/hooks/useTruckLoader";
 
-const TRUCK_CROSS = 3.2; // seconds for the truck to cross the screen
+const TRUCK_CROSS = 1.4; // seconds for the truck to cross the screen
 
 export function TruckLoader() {
   const reduce = useReducedMotion();
@@ -27,7 +27,7 @@ export function TruckLoader() {
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: done ? 0 : 1, scale: 1 }}
-            transition={{ delay: reduce ? 0 : 0.55, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: reduce ? 0 : 0.25, duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-center"
           >
             <Image
