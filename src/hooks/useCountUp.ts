@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { useInView, useReducedMotion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useInView } from "@/hooks/useInView";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface UseCountUpOptions {
   /** Target value to count up to. */
@@ -16,8 +17,7 @@ interface UseCountUpOptions {
  * Skips animation when `prefers-reduced-motion` is active.
  */
 export function useCountUp({ value, duration = 1500 }: UseCountUpOptions) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
+  const { ref, inView } = useInView({ once: true, margin: "-40px" });
   const reduce = useReducedMotion();
   const [display, setDisplay] = useState(reduce ? value : 0);
 

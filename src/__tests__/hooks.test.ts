@@ -2,17 +2,21 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { renderHook, act } from "@testing-library/react";
 import { useCountUp } from "@/hooks/useCountUp";
 
-// Mock framer-motion hooks
-vi.mock("framer-motion", () => ({
-  useInView: vi.fn().mockReturnValue(true),
+// Mock the custom hooks
+vi.mock("@/hooks/useInView", () => ({
+  useInView: vi.fn().mockReturnValue({ ref: { current: null }, inView: true }),
+}));
+
+vi.mock("@/hooks/useReducedMotion", () => ({
   useReducedMotion: vi.fn().mockReturnValue(false),
 }));
 
-import { useInView, useReducedMotion } from "framer-motion";
+import { useInView } from "@/hooks/useInView";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 beforeEach(() => {
   vi.useFakeTimers();
-  vi.mocked(useInView).mockReturnValue(true);
+  vi.mocked(useInView).mockReturnValue({ ref: { current: null }, inView: true });
   vi.mocked(useReducedMotion).mockReturnValue(false);
 });
 
@@ -40,14 +44,14 @@ describe("useCountUp", () => {
   });
 
   it("does not animate when not in view", () => {
-    vi.mocked(useInView).mockReturnValue(false);
+    vi.mocked(useInView).mockReturnValue({ ref: { current: null }, inView: false });
     const { result } = renderHook(() => useCountUp({ value: 100 }));
     act(() => { vi.advanceTimersByTime(2000); });
     expect(result.current.display).toBe(0);
   });
 
   it("counts up toward target when in view", () => {
-    vi.mocked(useInView).mockReturnValue(true);
+    vi.mocked(useInView).mockReturnValue({ ref: { current: null }, inView: true });
     const { result } = renderHook(() => useCountUp({ value: 100, duration: 1000 }));
     act(() => { vi.advanceTimersByTime(500); });
     expect(result.current.display).toBeGreaterThan(0);
@@ -55,7 +59,7 @@ describe("useCountUp", () => {
   });
 
   it("reaches target value after full duration", () => {
-    vi.mocked(useInView).mockReturnValue(true);
+    vi.mocked(useInView).mockReturnValue({ ref: { current: null }, inView: true });
     const { result } = renderHook(() => useCountUp({ value: 100, duration: 1000 }));
     act(() => { vi.advanceTimersByTime(1500); });
     expect(result.current.display).toBe(100);

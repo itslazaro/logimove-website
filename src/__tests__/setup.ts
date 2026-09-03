@@ -1,6 +1,21 @@
 import "@testing-library/jest-dom/vitest";
 
-// Polyfill IntersectionObserver for jsdom (used by framer-motion useInView)
+// Polyfill matchMedia for jsdom (used by useReducedMotion)
+Object.defineProperty(window, "matchMedia", {
+  writable: true,
+  value: (query: string) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: () => {},
+    removeListener: () => {},
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => false,
+  }),
+});
+
+// Polyfill IntersectionObserver for jsdom
 class MockIntersectionObserver {
   static instances: MockIntersectionObserver[] = [];
   callback: IntersectionObserverCallback;

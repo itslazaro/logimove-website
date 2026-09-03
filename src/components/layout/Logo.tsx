@@ -17,8 +17,8 @@ export function Logo({ href = true, className, onDark = false }: LogoProps) {
         <Image
           src="/logo.png"
           alt={`${site.name} logo`}
-          width={1024}
-          height={1024}
+          width={64}
+          height={64}
           className="size-8 object-contain"
         />
       </span>

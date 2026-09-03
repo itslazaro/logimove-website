@@ -1,16 +1,12 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, act } from "@testing-library/react";
 
-// Mock framer-motion to control animation behavior in tests
-vi.mock("framer-motion", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("framer-motion")>();
-  return {
-    ...actual,
-    useReducedMotion: vi.fn().mockReturnValue(false),
-  };
-});
+// Mock the custom useReducedMotion hook
+vi.mock("@/hooks/useReducedMotion", () => ({
+  useReducedMotion: vi.fn().mockReturnValue(false),
+}));
 
-import { useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { TruckLoader } from "@/components/loading/TruckLoader";
 
 beforeEach(() => {

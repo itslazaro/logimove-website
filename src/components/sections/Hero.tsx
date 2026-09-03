@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowRight, Gauge } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -6,12 +7,15 @@ import { Reveal } from "@/components/ui/Reveal";
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-gray-50">
-      {/* Background photo, faded into the surface on the left for text legibility. */}
+      {/* Background photo, optimized with next/image */}
       <div className="absolute inset-0 z-0">
-        <div
-          className="h-full w-full bg-cover bg-center opacity-30"
-          data-alt="A modern logistics hub viewed from above at dawn, with orange shipping container accents."
-          style={{ backgroundImage: "url('/images/logistics/hero-bg.jpg')" }}
+        <Image
+          src="/images/logistics/hero-bg.jpg"
+          alt="A modern logistics hub viewed from above at dawn, with orange shipping container accents."
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-30"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-gray-50 via-gray-50/80 to-transparent" />
       </div>
@@ -52,10 +56,12 @@ export function Hero() {
         <Reveal delay={0.3} className="hidden lg:block lg:col-span-5">
           <div className="grid grid-cols-2 gap-4">
             <figure className="group relative col-span-2 h-48 overflow-hidden rounded-xl shadow-sm">
-              <div
-                className="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                data-alt="A sleek cargo plane in flight over a bright sky."
-                style={{ backgroundImage: "url('/images/logistics/air.jpg')" }}
+              <Image
+                src="/images/logistics/air.jpg"
+                alt="A sleek cargo plane in flight over a bright sky."
+                fill
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <figcaption className="absolute bottom-4 left-4 rounded-full border border-gray-200 bg-white/90 px-3 py-1 text-xs font-bold text-ink-800 backdrop-blur-sm">
                 Air Freight
@@ -63,10 +69,12 @@ export function Hero() {
             </figure>
 
             <figure className="group relative h-48 overflow-hidden rounded-xl shadow-sm">
-              <div
-                className="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                data-alt="A cargo ship navigating calm seas with orange container accents."
-                style={{ backgroundImage: "url('/images/logistics/ocean.jpg')" }}
+              <Image
+                src="/images/logistics/ocean.jpg"
+                alt="A cargo ship navigating calm seas with orange container accents."
+                fill
+                sizes="(max-width: 1024px) 100vw, 20vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <figcaption className="absolute bottom-4 left-4 rounded-full border border-gray-200 bg-white/90 px-3 py-1 text-xs font-bold text-ink-800 backdrop-blur-sm">
                 Ocean

@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
+import { useInView } from "@/hooks/useInView";
+import { cn } from "@/lib/utils";
 
 interface RevealProps {
   children: ReactNode;
@@ -14,16 +15,15 @@ interface RevealProps {
 
 /** Fades + slides content into view once, on scroll (reduced-motion aware). */
 export function Reveal({ children, delay = 0, y = 16, className }: RevealProps) {
-  const reduce = useReducedMotion();
+  const { ref, inView } = useInView({ once: true, margin: "-80px" });
+
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y: reduce ? 0 : y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
+    <div
+      ref={ref}
+      className={cn("animate-reveal", inView && "is-in-view", className)}
+      style={{ "--reveal-y": `${y}px`, animationDelay: `${delay}s` } as React.CSSProperties}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

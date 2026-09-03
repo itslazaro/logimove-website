@@ -1,7 +1,6 @@
 "use client";
 
 import { useId, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -34,22 +33,17 @@ export function AccordionItem({ question, answer, defaultOpen = false }: Accordi
           />
         </button>
       </h3>
-      <AnimatePresence initial={false}>
-        {open ? (
-          <motion.div
-            id={panelId}
-            role="region"
-            aria-labelledby={buttonId}
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden"
-          >
-            <p className="px-5 pb-5 text-gray-500">{answer}</p>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+      <div
+        id={panelId}
+        role="region"
+        aria-labelledby={buttonId}
+        data-open={String(open)}
+        className="accordion-panel"
+      >
+        <div>
+          <p className="px-5 pb-5 text-gray-500">{answer}</p>
+        </div>
+      </div>
     </div>
   );
 }

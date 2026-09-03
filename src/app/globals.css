@@ -96,3 +96,114 @@
     font-variant-numeric: tabular-nums;
   }
 }
+
+/* ── Reveal animation (scroll-triggered fade+slide) ── */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-y, 16px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-reveal {
+  opacity: 0;
+  animation: reveal-up 0.6s var(--ease-out-expo) forwards;
+  animation-play-state: paused;
+}
+
+.animate-reveal.is-in-view {
+  animation-play-state: running;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-reveal {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
+/* ── Accordion expand / collapse ── */
+.accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.3s var(--ease-out-expo),
+              opacity 0.3s var(--ease-out-expo);
+}
+
+.accordion-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.accordion-panel > div {
+  overflow: hidden;
+}
+
+/* ── Truck loader animations ── */
+@keyframes truck-drive {
+  0%   { transform: translateX(-45vw); }
+  100% { transform: translateX(115vw); }
+}
+
+@keyframes truck-drive-reduced {
+  0%   { transform: translateX(-45vw); }
+  100% { transform: translateX(32vw); }
+}
+
+@keyframes dust-pulse {
+  0%, 100% { opacity: 0; }
+  25%      { opacity: 0.7; }
+  50%      { opacity: 0.2; }
+  75%      { opacity: 0.7; }
+}
+
+@keyframes loader-fade-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.loader-overlay {
+  transition: opacity 0.45s ease-out;
+}
+
+.loader-overlay[data-done="true"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-logo {
+  opacity: 0;
+  animation: loader-fade-in 0.35s var(--ease-out-expo) forwards;
+  animation-delay: 0.25s;
+}
+
+.loader-overlay[data-done="true"] .loader-logo {
+  opacity: 0;
+  animation: none;
+}
+
+.loader-truck {
+  animation: truck-drive 1.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+.loader-dust {
+  animation: dust-pulse 0.7s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader-truck {
+    animation: truck-drive-reduced 0.01s linear forwards;
+  }
+  .loader-dust {
+    animation: none;
+  }
+  .loader-logo {
+    animation-delay: 0s;
+  }
+}

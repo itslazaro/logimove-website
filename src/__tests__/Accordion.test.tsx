@@ -18,7 +18,9 @@ describe("AccordionItem", () => {
     render(<AccordionItem {...defaultProps} />);
     const button = screen.getByRole("button", { name: defaultProps.question });
     expect(button).toHaveAttribute("aria-expanded", "false");
-    expect(screen.queryByText(defaultProps.answer)).not.toBeInTheDocument();
+    // Panel is in DOM but collapsed via CSS (data-open="false")
+    const panel = document.querySelector("[data-open]") as HTMLElement;
+    expect(panel).toHaveAttribute("data-open", "false");
   });
 
   it("expands when clicked", async () => {
@@ -41,6 +43,8 @@ describe("AccordionItem", () => {
     await user.click(button);
 
     expect(button).toHaveAttribute("aria-expanded", "false");
+    const panel = document.querySelector("[data-open]") as HTMLElement;
+    expect(panel).toHaveAttribute("data-open", "false");
   });
 
   it("opens when defaultOpen is true", () => {
