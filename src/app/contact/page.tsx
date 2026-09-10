@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Clock3, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { site } from "@/config/site";
 import { faqs } from "@/content/faqs";
@@ -12,7 +13,7 @@ import { ContactForm } from "@/components/contact/ContactForm";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Contact LogiMove on WhatsApp for a fast shipping quote. Reach our logistics team directly — no forms sitting in a queue.",
+    "Contact LogiMove on WhatsApp for a fast shipping quote. Reach our logistics team directly, without a form sitting in a queue.",
 };
 
 const contactChannels = [
@@ -31,8 +32,19 @@ const contactChannels = [
 export default function ContactPage() {
   return (
     <>
-      <section className="border-b border-gray-100 bg-gray-50 py-20 sm:py-24">
-        <Container>
+      <section className="relative overflow-hidden border-b border-gray-100 bg-gray-50 py-20 sm:py-24">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/logistics/contact-hero.jpg"
+            alt="A warehouse employee smiling while holding a clipboard, ready to help."
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-50 via-gray-50/85 to-gray-50/40" />
+        </div>
+        <Container className="relative z-10">
           <Reveal>
             <Badge>Contact Us</Badge>
             <h1 className="mt-5 max-w-2xl font-display text-4xl font-extrabold tracking-tight text-ink-900 text-balance sm:text-5xl">
@@ -41,7 +53,7 @@ export default function ContactPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-500">
-              Tell us where your freight needs to go and we&apos;ll get back to you with a quote —
+              Tell us where your freight needs to go and we&apos;ll get back to you with a quote,
               usually within hours. Message us on WhatsApp or use the form below.
             </p>
           </Reveal>
@@ -106,7 +118,7 @@ export default function ContactPage() {
             <SectionHeading
               eyebrow="FAQ"
               title="Frequently asked questions"
-              description="Quick answers on shipping, customs, tracking, and billing. Can&apos;t find what you need? Message us on WhatsApp — we reply fast."
+              description="Quick answers on shipping, customs, tracking, and billing. Can&apos;t find what you need? Message us on WhatsApp. We reply fast."
             />
             <div className="mt-12 space-y-12">
               {faqs.map((category, categoryIndex) => (

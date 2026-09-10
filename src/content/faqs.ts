@@ -17,7 +17,7 @@ export const faqs: FaqCategory[] = [
       {
         question: "How do I get a shipping quote?",
         answer:
-          "Use the Contact page or the WhatsApp button, tell us the service, origin, and destination, and our team will send a tailored quote — usually within a few hours on business days.",
+          "Use the Contact page or the WhatsApp button, tell us the service, origin, and destination, and our team will send a tailored quote, usually within a few hours on business days.",
       },
       {
         question: "Which shipping method is right for me?",
@@ -64,7 +64,7 @@ export const faqs: FaqCategory[] = [
       {
         question: "How long will my shipment take?",
         answer:
-          "Transit times vary by mode and route — air freight is days, ocean is weeks, and road/rail depends on distance. We confirm exact estimates before you book.",
+          "Transit times vary by mode and route: air freight is days, ocean is weeks, and road/rail depends on distance. We confirm exact estimates before you book.",
       },
       {
         question: "What happens if my shipment is delayed?",
@@ -85,7 +85,7 @@ export const faqs: FaqCategory[] = [
       {
         question: "Can I contact someone outside business hours?",
         answer:
-          "Yes — WhatsApp is our primary channel and messages are answered quickly, including outside standard hours. Our team is also available by phone and email.",
+          "Yes. WhatsApp is our primary channel and messages are answered quickly, including outside standard hours. Our team is also available by phone and email.",
       },
     ],
   },

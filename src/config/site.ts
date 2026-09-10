@@ -7,7 +7,7 @@ export const site = {
   legalName: "LogiMove Logistics",
   tagline: "Moving your world, reliably.",
   description:
-    "LogiMove is an international logistics company offering air freight, ocean freight, road transport, warehousing, and customs clearance — with fast, personal service on WhatsApp.",
+    "LogiMove is an international logistics company offering air freight, ocean freight, road transport, warehousing, and customs clearance, with fast, personal service on WhatsApp.",
 
   /** Official WhatsApp Click-to-Chat requires digits only (country code + number). */
   whatsappNumber: "12345550199",
@@ -29,6 +29,7 @@ export const site = {
     { label: "Home", href: "/" },
     { label: "Services", href: "/services" },
     { label: "About", href: "/about" },
+    { label: "Blog", href: "/blog" },
     { label: "FAQ", href: "/faq" },
     { label: "Contact", href: "/contact" },
   ],

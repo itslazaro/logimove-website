@@ -5,6 +5,9 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { TruckLoader } from "@/components/loading/TruckLoader";
+import { PageTransition } from "@/components/layout/PageTransition";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { Analytics } from "@/components/analytics/Analytics";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -27,7 +30,7 @@ const jetbrains = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: `${site.name} — International Freight & Logistics`,
+    default: `${site.name} | International Freight & Logistics`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
@@ -37,13 +40,18 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: site.siteUrl,
     siteName: site.legalName,
-    title: `${site.name} — ${site.tagline}`,
+    title: `${site.name} | ${site.tagline}`,
     description: site.description,
   },
   robots: {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
@@ -57,9 +65,13 @@ export default function RootLayout({
       className={`${archivo.variable} ${inter.variable} ${jetbrains.variable}`}
     >
       <body className="flex min-h-screen flex-col">
+        <JsonLd />
+        <Analytics />
         <TruckLoader />
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1">
+          <PageTransition>{children}</PageTransition>
+        </main>
         <Footer />
         <WhatsAppButton />
       </body>

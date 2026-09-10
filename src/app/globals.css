@@ -147,8 +147,15 @@
 
 /* ── Truck loader animations ── */
 @keyframes truck-drive {
-  0%   { transform: translateX(-45vw); }
-  100% { transform: translateX(115vw); }
+  0%    { transform: translateX(-45vw); }
+  28%   { transform: translateX(calc(50vw - 48px)); }
+  /* Suspension settle: compress, rebound, ease to rest — a single, weighted
+     bounce rather than repeated oscillation, for a calmer, premium feel. */
+  35%   { transform: translateX(calc(50vw - 48px)) translateY(5px) scaleY(0.95); }
+  46%   { transform: translateX(calc(50vw - 48px)) translateY(-13px) scaleY(1.03); }
+  60%   { transform: translateX(calc(50vw - 48px)) translateY(2px) scaleY(0.98); }
+  70%   { transform: translateX(calc(50vw - 48px)) translateY(0) scaleY(1); }
+  100%  { transform: translateX(118vw) translateY(0) scaleY(1); }
 }
 
 @keyframes truck-drive-reduced {
@@ -156,20 +163,16 @@
   100% { transform: translateX(32vw); }
 }
 
-@keyframes dust-pulse {
-  0%, 100% { opacity: 0; }
-  25%      { opacity: 0.7; }
-  50%      { opacity: 0.2; }
-  75%      { opacity: 0.7; }
-}
-
-@keyframes loader-fade-in {
-  from { opacity: 0; transform: scale(0.96); }
-  to   { opacity: 1; transform: scale(1); }
+/* A single puff: spawns at the exhaust, blooms, drifts back, and dissolves —
+   the "cloud shooting out" trail behind the truck. */
+@keyframes puff-out {
+  0%   { transform: translateX(0) scale(0.35); opacity: 0; }
+  16%  { opacity: 0.8; }
+  100% { transform: translateX(-4rem) scale(2.1); opacity: 0; }
 }
 
 .loader-overlay {
-  transition: opacity 0.45s ease-out;
+  transition: opacity 0.4s ease-out;
 }
 
 .loader-overlay[data-done="true"] {
@@ -177,33 +180,35 @@
   pointer-events: none;
 }
 
-.loader-logo {
-  opacity: 0;
-  animation: loader-fade-in 0.35s var(--ease-out-expo) forwards;
-  animation-delay: 0.25s;
-}
-
-.loader-overlay[data-done="true"] .loader-logo {
-  opacity: 0;
-  animation: none;
-}
-
 .loader-truck {
-  animation: truck-drive 1.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  animation: truck-drive 1.6s var(--ease-out-expo) forwards;
 }
 
-.loader-dust {
-  animation: dust-pulse 0.7s linear infinite;
+.loader-exhaust {
+  pointer-events: none;
 }
+
+.loader-puff {
+  position: absolute;
+  bottom: 0.35rem;
+  right: 0;
+  height: 1.1rem;
+  width: 1.1rem;
+  border-radius: 9999px;
+  background: radial-gradient(circle, var(--color-brand-300) 0%, var(--color-brand-100) 45%, transparent 75%);
+  opacity: 0;
+  animation: puff-out 0.85s ease-out infinite;
+}
+
+.loader-puff:nth-child(2) { animation-delay: 0.22s; }
+.loader-puff:nth-child(3) { animation-delay: 0.44s; }
 
 @media (prefers-reduced-motion: reduce) {
   .loader-truck {
     animation: truck-drive-reduced 0.01s linear forwards;
   }
-  .loader-dust {
+  .loader-puff {
     animation: none;
-  }
-  .loader-logo {
-    animation-delay: 0s;
+    opacity: 0;
   }
 }

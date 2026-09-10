@@ -11,11 +11,11 @@ export const testimonials: Testimonial[] = [
   {
     id: "t1",
     content:
-      "LogiMove moved a full container from Shanghai to our LA warehouse ahead of schedule. Their customs team handled everything — zero delays at the border.",
+      "LogiMove moved a full container from Shanghai to our LA warehouse ahead of schedule. Their customs team handled everything, with zero delays at the border.",
     rating: 5,
     name: "Daniel Okafor",
     position: "Import Operations Manager, Acme Retail",
-    service: "Ocean Freight — FCL",
+    service: "Ocean Freight: FCL",
   },
   {
     id: "t2",

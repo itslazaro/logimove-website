@@ -7,7 +7,7 @@ const reasons = [
   {
     Icon: MessageCircle,
     title: "Answers in minutes on WhatsApp",
-    text: "Talk to a real logistics specialist the moment you reach out — no ticket queues.",
+    text: "Talk to a real logistics specialist the moment you reach out, no ticket queues.",
   },
   {
     Icon: ShieldCheck,
