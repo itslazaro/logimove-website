@@ -6,6 +6,9 @@ export interface Service {
   /** Lucide icon name — resolved in the UI layer. */
   icon: "Plane" | "Ship" | "Container" | "Truck" | "Warehouse" | "ShieldCheck";
   features: string[];
+  /** Path under /public to a representative photo for this service. */
+  image: string;
+  imageAlt: string;
 }
 
 export const services: Service[] = [
@@ -22,10 +25,12 @@ export const services: Service[] = [
       "Live shipment tracking",
       "Dangerous-goods handling on request",
     ],
+    image: "/images/logistics/air-card.jpg",
+    imageAlt: "Air cargo pallet being loaded into a jet.",
   },
   {
     code: "OCEAN_FCL",
-    name: "Ocean Freight — Full Container Load",
+    name: "Ocean Freight: Full Container Load",
     short: "Dedicated FCL containers for large, cost-efficient volumes.",
     description:
       "Full container load (FCL) shipments with dedicated space, reliable schedules, and competitive rates on the world's busiest ocean routes.",
@@ -36,10 +41,12 @@ export const services: Service[] = [
       "Port-to-port or door-to-door",
       "Reefer and special equipment",
     ],
+    image: "/images/logistics/ocean.jpg",
+    imageAlt: "A cargo ship navigating calm seas with stacked containers.",
   },
   {
     code: "OCEAN_LCL",
-    name: "Ocean Freight — Less than Container Load",
+    name: "Ocean Freight: Less than Container Load",
     short: "Shared containers for smaller shipments at economical rates.",
     description:
       "Less than container load (LCL) consolidation lets you ship smaller volumes economically, with cargo consolidated at origin and de-consolidated at destination.",
@@ -50,6 +57,8 @@ export const services: Service[] = [
       "Weekly sailings on key lanes",
       "Breakbulk handling included",
     ],
+    image: "/images/logistics/ocean-lcl.jpg",
+    imageAlt: "The stern of a fully loaded container ship in port.",
   },
   {
     code: "ROAD",
@@ -64,6 +73,8 @@ export const services: Service[] = [
       "GPS-tracked fleet",
       "Time-definite delivery",
     ],
+    image: "/images/logistics/road-card.jpg",
+    imageAlt: "A freight truck on an open highway at sunrise.",
   },
   {
     code: "WAREHOUSING",
@@ -78,6 +89,8 @@ export const services: Service[] = [
       "Picking, packing & labeling",
       "Nationwide distribution",
     ],
+    image: "/images/logistics/warehousing-card.jpg",
+    imageAlt: "Warehouse staff reviewing inventory between pallet racks.",
   },
   {
     code: "CUSTOMS",
@@ -92,6 +105,8 @@ export const services: Service[] = [
       "Tariff classification",
       "Compliance documentation",
     ],
+    image: "/images/logistics/customs-doc-card.jpg",
+    imageAlt: "A courier reviewing a customs document on a clipboard.",
   },
 ];
 

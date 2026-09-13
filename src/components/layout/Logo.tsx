@@ -12,19 +12,24 @@ interface LogoProps {
 
 export function Logo({ href = true, className, onDark = false }: LogoProps) {
   const content = (
-    <span className={cn("flex items-center gap-2", className)}>
-      <span className="flex size-9 items-center justify-center rounded-lg bg-white ring-1 ring-gray-200">
+    <span className={cn("flex items-center gap-2.5", className)}>
+      <span
+        className={cn(
+          "flex size-11 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ring-1",
+          onDark ? "ring-white/15" : "ring-ink-900/10",
+        )}
+      >
         <Image
           src="/logo.png"
           alt={`${site.name} logo`}
           width={64}
           height={64}
-          className="size-8 object-contain"
+          className="size-9 object-contain"
         />
       </span>
       <span
         className={cn(
-          "font-display text-lg font-extrabold tracking-tight",
+          "font-display text-xl font-extrabold tracking-tight",
           onDark ? "text-white" : "text-ink-900",
         )}
       >

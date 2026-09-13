@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Compass, Globe2, HeartHandshake, ShieldCheck } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -10,7 +11,7 @@ import { CtaSection } from "@/components/sections/CtaSection";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Learn about LogiMove — our story, our values, and the team behind reliable international logistics.",
+    "Learn about LogiMove: our story, our values, and the team behind reliable international logistics.",
 };
 
 const values = [
@@ -27,7 +28,7 @@ const values = [
   {
     Icon: HeartHandshake,
     title: "Partnership over transactions",
-    text: "We act as an extension of your supply chain — transparent, responsive, and long-term minded.",
+    text: "We act as an extension of your supply chain: transparent, responsive, and long-term minded.",
   },
   {
     Icon: Compass,
@@ -39,8 +40,19 @@ const values = [
 export default function AboutPage() {
   return (
     <>
-      <section className="border-b border-gray-100 bg-gray-50 py-20 sm:py-24">
-        <Container>
+      <section className="relative overflow-hidden border-b border-gray-100 bg-gray-50 py-20 sm:py-24">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/logistics/about-team.jpg"
+            alt="Warehouse staff in high-visibility vests discussing a shipment."
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-25"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-50 via-gray-50/85 to-gray-50/40" />
+        </div>
+        <Container className="relative z-10">
           <Reveal>
             <Badge>About LogiMove</Badge>
             <h1 className="mt-5 max-w-2xl font-display text-4xl font-extrabold tracking-tight text-ink-900 text-balance sm:text-5xl">
@@ -51,12 +63,12 @@ export default function AboutPage() {
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-500">
               LogiMove was founded to make international shipping simpler for growing businesses.
               What started as a small freight brokerage has grown into a full-service logistics
-              provider — but we&apos;ve never lost the responsiveness our first customers relied on.
+              provider, but we&apos;ve never lost the responsiveness our first customers relied on.
             </p>
             <p className="mt-4 max-w-2xl leading-relaxed text-gray-500">
               Today we move air, ocean, and road freight across the world&apos;s busiest trade lanes,
               backed by licensed customs brokerage, warehousing, and a team that answers on
-              WhatsApp — because that&apos;s how modern shippers want to talk.
+              WhatsApp, because that&apos;s how modern shippers want to talk.
             </p>
           </Reveal>
         </Container>

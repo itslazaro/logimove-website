@@ -11,11 +11,11 @@ export function PartnersSection() {
             Carrier & partner network
           </p>
         </Reveal>
-        <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
+        <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
           {partners.map((partner, index) => (
             <Reveal key={partner.id} delay={index * 0.05}>
-              <li className="flex flex-col items-center gap-1 text-center">
-                <span className="font-display text-lg font-bold text-gray-400 transition-colors hover:text-ink-900">
+              <li className="group flex h-full flex-col items-center justify-center gap-1 rounded-xl border border-gray-100 px-3 py-5 text-center transition-colors hover:border-gray-200 hover:bg-gray-50">
+                <span className="font-display text-base font-bold text-ink-700 transition-colors group-hover:text-ink-900 sm:text-lg">
                   {partner.name}
                 </span>
                 <span className="text-xs text-gray-400">{partner.category}</span>

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, screen, act } from "@testing-library/react";
+import { render, act } from "@testing-library/react";
 
 // Mock the custom useReducedMotion hook
 vi.mock("@/hooks/useReducedMotion", () => ({
@@ -21,19 +21,20 @@ afterEach(() => {
 
 describe("TruckLoader", () => {
   it("renders the loader overlay", () => {
-    render(<TruckLoader />);
-    expect(screen.getByText(/moving your world/i)).toBeInTheDocument();
+    const { container } = render(<TruckLoader />);
+    expect(container.querySelector(".loader-overlay")).toBeInTheDocument();
   });
 
   it("is hidden from assistive tech via aria-hidden", () => {
-    render(<TruckLoader />);
-    const overlay = screen.getByText(/moving your world/i).closest("[aria-hidden]");
+    const { container } = render(<TruckLoader />);
+    const overlay = container.querySelector(".loader-overlay");
     expect(overlay).toHaveAttribute("aria-hidden", "true");
   });
 
-  it("shows the logo", () => {
-    render(<TruckLoader />);
-    expect(screen.getByAltText(/logimove logo/i)).toBeInTheDocument();
+  it("shows the truck icon with its exhaust trail", () => {
+    const { container } = render(<TruckLoader />);
+    expect(container.querySelector(".loader-truck svg")).toBeInTheDocument();
+    expect(container.querySelectorAll(".loader-puff")).toHaveLength(3);
   });
 
   it("self-removes after the hold duration", () => {

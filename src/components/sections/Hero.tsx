@@ -34,7 +34,7 @@ export function Hero() {
 
           <Reveal delay={0.16}>
             <p className="max-w-xl text-lg leading-relaxed text-gray-500">
-              Air, ocean, and road freight handled start to finish — with licensed customs
+              Air, ocean, and road freight handled start to finish, with licensed customs
               brokerage, live tracking, and a team that answers on WhatsApp.
             </p>
           </Reveal>

@@ -1,0 +1,17 @@
+{
+  "name": "LogiMove Logistics",
+  "short_name": "LogiMove",
+  "description": "International freight forwarding and logistics company",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#f2600c",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

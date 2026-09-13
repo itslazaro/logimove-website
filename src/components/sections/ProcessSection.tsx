@@ -7,7 +7,7 @@ const steps = [
   {
     Icon: MessageCircle,
     title: "Reach out",
-    text: "Message us on WhatsApp with your route and cargo details — it takes under two minutes.",
+    text: "Message us on WhatsApp with your route and cargo details. It takes under two minutes.",
   },
   {
     Icon: FileText,

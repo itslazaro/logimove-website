@@ -23,7 +23,7 @@ export function CtaSection() {
                 Ready to move your next shipment?
               </h2>
               <p className="mt-4 text-lg text-gray-100/70">
-                Get a quote in minutes — just message us on WhatsApp and tell us where your cargo
+                Get a quote in minutes. Just message us on WhatsApp and tell us where your cargo
                 needs to go.
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-4">

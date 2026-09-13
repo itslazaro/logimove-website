@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
-const TOTAL_HOLD = 1600;
-const FADE_OUT_DURATION = 400;
-const REDUCED_HOLD = 500;
+const TOTAL_HOLD = 1500;
+const FADE_OUT_DURATION = 350;
+const REDUCED_HOLD = 400;
 
 /**
  * Manages the branded truck loader lifecycle.
